@@ -32,6 +32,10 @@ while (my $row = $query->fetchrow_arrayref()) {
   my $q = $db->prepare("UPDATE domain SET status = 1 WHERE (id == @$row[0])");
   $q->execute() or die($db->errstr);
 
-  system("rndc", "reload");
+  open LOG, ">>", 'log/cron.log' or die $!;
+  print LOG "@$row[1] added";
+  close LOG or die $!;
 }
+
+system("rndc", "reload");
 
