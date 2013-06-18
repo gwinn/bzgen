@@ -11,6 +11,9 @@ my $query = $db->prepare("SELECT * FROM domain WHERE (status == 0)");
 
 $query->execute() or die($db->errstr);
 
+open LOG, ">>", 'log/cron.log' or die $!;
+print LOG "================= start task ================\n\n";
+
 while (my $row = $query->fetchrow_arrayref()) {
   open FILE, "<templates/template.$conf->{'servtype'}" or die $!;
   open CONF, ">>", $conf->{'named_path'} or die $!;
@@ -32,10 +35,11 @@ while (my $row = $query->fetchrow_arrayref()) {
   my $q = $db->prepare("UPDATE domain SET status = 1 WHERE (id == @$row[0])");
   $q->execute() or die($db->errstr);
 
-  open LOG, ">>", 'log/cron.log' or die $!;
   print LOG "@$row[1] added";
-  close LOG or die $!;
+
 }
 
+print LOG "================= end task ================\n\n";
+close LOG or die $!;
 system("rndc", "reload");
 
