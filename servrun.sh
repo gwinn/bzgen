@@ -17,7 +17,7 @@ fi
 
 run_task() {
 
-    CMD="perl api.pl daemon --listen http://127.0.0.1:8088 >/dev/null 2>&1 &"
+    CMD="perl api.pl daemon -m ${ENVIRONMENT} --listen http://127.0.0.1:8088 >/dev/null 2>&1 &"
 
     run () {
         eval $1

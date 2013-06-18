@@ -17,4 +17,5 @@ get '/*domain/queue' => sub {
       : $self->render(json => {"status" => "error", "message" => "queue crushed"});
 };
 
+app->log->debug('Starting application.');
 app->start;
