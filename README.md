@@ -1,4 +1,4 @@
 bzgen
 =======
 
-Simple generator for bind dns server.
+Simple generator of zone files for Bind.
