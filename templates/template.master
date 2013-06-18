@@ -1,0 +1,6 @@
+zone "__domain__" IN {
+    type master;
+    file "__domain__.zone";
+    allow-update { none; };
+};
+

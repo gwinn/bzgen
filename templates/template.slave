@@ -1,0 +1,6 @@
+zone "__domain__" IN {
+  type slave;
+  masters { 8.8.8.8; };
+  file "slaves/__domain__.zone";
+};
+
