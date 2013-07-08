@@ -15,3 +15,8 @@
 *.exe
 *.out
 *.app
+
+# IDE
+*.settings
+*.project
+*.buildpath
